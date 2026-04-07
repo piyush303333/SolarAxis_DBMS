@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SolarAxis — Global Solar Energy Management Solutions</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@300;400;500;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<link rel="stylesheet" href="static/style.css">
+
+
+
+</head>
+<body>
+<!-- <script src="script.js"></script> -->
+<div id="scrollProgress"></div>
+<button id="backToTop" title="Back to top">↑</button>
+<div id="toast"></div>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<div class="bg-canvas">
+  <div class="bg-grid"></div>
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-orb orb3"></div>
+</div>
+
+<nav class="navbar" id="navbar">
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-icon">☀️</div>
+    <div class="nav-logo-text">SolarAxis</div>
+  </a>
+  <div class="nav-links">
+    <a href="#solutions" class="nav-link" data-section="solutions">Solutions</a>
+    <a href="#dashboard-preview" class="nav-link" data-section="dashboard-preview">Platform</a>
+    <a href="#global" class="nav-link" data-section="global">Global</a>
+    <a href="#management" class="nav-link" data-section="management">Management</a>
+    <a href="#calculator" class="nav-link" data-section="calculator">Calculator</a>
+    <a href="#process" class="nav-link" data-section="process">Process</a>
+    <a href="#solar-science" class="nav-link" data-section="solar-science" style="color:var(--sun)">☀️ Science</a>
+    <a href="#testimonials" class="nav-link" data-section="testimonials">Clients</a>
+
+
+
+
+<!-- index.html mein navbar ke buttons ko aise change kar -->
+<div class="nav-cta">
+    <a href="/login" class="btn btn-ghost">Sign In</a> <!-- Link to /login -->
+    <a href="/signup" class="btn btn-primary">🚀 Get Started</a> <!-- Link to /signup -->
+</div>
+
+<!-- CSS aur JS ka path aise dena (Flask Style) -->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='script.js') }}" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+  </div>
+  <div class="nav-cta">
+    <button class="btn btn-ghost">Sign In</button>
+    <button class="btn btn-primary" onclick="openChat()">🌞 Get Demo</button>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div> -->
+</nav>
+
+<div class="page">
+<section id="hero">
+  <div class="hero-eyebrow">🌍 CREATED BY:- PIYUSH GOKHE• DBMS PROJECT• Roll no :- 1</div>
+  <div class="hero-grid">
+    <div class="hero-left">
+      <h1 class="hero-h1">
+        <span class="line-accent">Solar Energy</span><br>
+        <span class="line-outline">Management</span><br>
+        Software
+      </h1>
+      <p class="hero-desc">End-to-end solar management platform built for South Africa, USA, India & global markets. Real-time monitoring, AI diagnostics, subsidy management & mobile apps — all in one.</p>
+      <div class="hero-btns">
+        <button class="btn btn-primary" style="font-size:15px;padding:13px 28px" onclick="openChat()">🚀 Start Free Trial</button>
+        <button class="btn btn-outline" style="font-size:15px;padding:13px 28px" onclick="document.getElementById('dashboard-preview').scrollIntoView({behavior:'smooth'})">View Platform →</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-val">2.4GW</div><div class="hstat-lbl">Managed Capacity</div></div>
+        <div class="hstat"><div class="hstat-val">12K+</div><div class="hstat-lbl">Active Plants</div></div>
+        <div class="hstat"><div class="hstat-val">40+</div><div class="hstat-lbl">Countries</div></div>
+        <div class="hstat"><div class="hstat-val">99.7%</div><div class="hstat-lbl">Uptime SLA</div></div>
+      </div>
+      <div class="global-bar">
+        <div class="global-bar-label">OFFICES IN</div>
+        <div class="flags-scroll">
+          <div class="flag-item"><span>🇮🇳</span> India</div>
+          <div class="flag-item"><span>🇺🇸</span> USA</div>
+          <div class="flag-item"><span>🇿🇦</span> South Africa</div>
+          <div class="flag-item"><span>🇦🇺</span> Australia</div>
+          <div class="flag-item"><span>🇩🇪</span> Germany</div>
+          <div class="flag-item"><span>🇧🇷</span> Brazil</div>
+          <div class="flag-item"><span>🇦🇪</span> UAE</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="solar-viz">
+        <div class="sun-rays">
+          <div style="position:absolute;top:50%;left:50%;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(255,210,100,0.9),rgba(245,166,35,0.6));transform:translate(-50%,-50%);box-shadow:0 0 40px rgba(255,210,100,0.8);animation:sunGlow 2s ease-in-out infinite;"></div>
+          <div class="ray" style="height:35px;transform:translate(-50%,-100%) rotate(0deg);"></div>
+          <div class="ray" style="height:28px;transform:translate(-50%,-100%) rotate(45deg);"></div>
+          <div class="ray" style="height:35px;transform:translate(-50%,-100%) rotate(90deg);"></div>
+          <div class="ray" style="height:28px;transform:translate(-50%,-100%) rotate(135deg);"></div>
+          <div class="ray" style="height:35px;transform:translate(-50%,-100%) rotate(180deg);"></div>
+          <div class="ray" style="height:28px;transform:translate(-50%,-100%) rotate(225deg);"></div>
+          <div class="ray" style="height:35px;transform:translate(-50%,-100%) rotate(270deg);"></div>
+          <div class="ray" style="height:28px;transform:translate(-50%,-100%) rotate(315deg);"></div>
+        </div>
+        <style>@keyframes sunGlow{0%,100%{box-shadow:0 0 30px rgba(255,210,100,0.7);}50%{box-shadow:0 0 60px rgba(255,210,100,1);}}</style>
+        <svg class="solar-panel-svg" viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="20" width="460" height="300" rx="8" fill="#0a1628" stroke="rgba(245,166,35,0.4)" stroke-width="2"/>
+          <line x1="20" y1="118" x2="480" y2="118" stroke="rgba(245,166,35,0.3)" stroke-width="1.5"/>
+          <line x1="20" y1="216" x2="480" y2="216" stroke="rgba(245,166,35,0.3)" stroke-width="1.5"/>
+          <line x1="178" y1="20" x2="178" y2="320" stroke="rgba(245,166,35,0.3)" stroke-width="1.5"/>
+          <line x1="336" y1="20" x2="336" y2="320" stroke="rgba(245,166,35,0.3)" stroke-width="1.5"/>
+          <rect class="panel-cell" x="28" y="28" width="70" height="82" rx="3"/>
+          <rect class="panel-cell" x="104" y="28" width="70" height="82" rx="3" style="animation-delay:0.15s"/>
+          <rect class="panel-cell" x="186" y="28" width="70" height="82" rx="3" style="animation-delay:0.3s"/>
+          <rect class="panel-cell" x="262" y="28" width="70" height="82" rx="3" style="animation-delay:0.45s"/>
+          <rect class="panel-cell" x="344" y="28" width="70" height="82" rx="3" style="animation-delay:0.6s"/>
+          <rect class="panel-cell" x="404" y="28" width="68" height="82" rx="3" style="animation-delay:0.75s"/>
+          <rect class="panel-cell" x="28" y="126" width="70" height="82" rx="3" style="animation-delay:0.9s"/>
+          <rect class="panel-cell" x="104" y="126" width="70" height="82" rx="3" style="animation-delay:1.05s"/>
+          <rect class="panel-cell" x="186" y="126" width="70" height="82" rx="3" style="animation-delay:1.2s"/>
+          <rect class="panel-cell" x="262" y="126" width="70" height="82" rx="3" style="animation-delay:1.35s"/>
+          <rect class="panel-cell" x="344" y="126" width="70" height="82" rx="3" style="animation-delay:1.5s"/>
+          <rect class="panel-cell" x="404" y="126" width="68" height="82" rx="3" style="animation-delay:1.65s"/>
+          <rect class="panel-cell" x="28" y="224" width="70" height="88" rx="3" style="animation-delay:1.8s"/>
+          <rect class="panel-cell" x="104" y="224" width="70" height="88" rx="3" style="animation-delay:1.95s"/>
+          <rect class="panel-cell" x="186" y="224" width="70" height="88" rx="3" style="animation-delay:2.1s"/>
+          <rect class="panel-cell" x="262" y="224" width="70" height="88" rx="3" style="animation-delay:2.25s"/>
+          <rect class="panel-cell" x="344" y="224" width="70" height="88" rx="3" style="animation-delay:2.4s"/>
+          <rect class="panel-cell" x="404" y="224" width="68" height="88" rx="3" style="animation-delay:2.55s"/>
+          <line x1="63" y1="28" x2="63" y2="110" stroke="rgba(245,197,24,0.5)" stroke-width="0.8"/>
+          <line x1="139" y1="28" x2="139" y2="110" stroke="rgba(245,197,24,0.5)" stroke-width="0.8"/>
+          <line x1="221" y1="28" x2="221" y2="110" stroke="rgba(245,197,24,0.5)" stroke-width="0.8"/>
+          <line x1="297" y1="28" x2="297" y2="110" stroke="rgba(245,197,24,0.5)" stroke-width="0.8"/>
+          <line x1="379" y1="28" x2="379" y2="110" stroke="rgba(245,197,24,0.5)" stroke-width="0.8"/>
+          <polygon points="120,320 140,370 100,370" fill="#1a2a40" stroke="rgba(245,166,35,0.2)" stroke-width="1"/>
+          <polygon points="380,320 400,370 360,370" fill="#1a2a40" stroke="rgba(245,166,35,0.2)" stroke-width="1"/>
+          <line x1="100" y1="370" x2="400" y2="370" stroke="rgba(245,166,35,0.3)" stroke-width="2"/>
+          <path d="M 250 370 L 250 350 L 490 350 L 490 300" stroke="rgba(200,241,53,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="6 3">
+            <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1s" repeatCount="indefinite"/>
+          </path>
+          <rect x="350" y="345" width="130" height="30" rx="6" fill="rgba(200,241,53,0.1)" stroke="rgba(200,241,53,0.3)" stroke-width="1"/>
+          <text x="415" y="365" text-anchor="middle" fill="#C8F135" font-size="11" font-family="monospace">⚡ 847 kW OUTPUT</text>
+          <circle cx="250" cy="350" r="6" fill="#22C55E">
+            <animate attributeName="r" values="6;10;6" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <div class="energy-flow">
+          <div class="flow-dot"></div><div class="flow-dot"></div><div class="flow-dot"></div><div class="flow-dot"></div><div class="flow-dot"></div>
+        </div>
+        <div class="float-card fc1">
+          <div class="fc-label">LIVE OUTPUT</div>
+          <div class="fc-val">847 kW</div>
+          <div class="fc-sub"><i class="fas fa-arrow-up"></i> +12% from yesterday</div>
+        </div>
+        <div class="float-card fc2">
+          <div class="fc-label">CO₂ SAVED TODAY</div>
+          <div class="fc-val">2.4 t</div>
+          <div class="fc-sub"><i class="fas fa-leaf"></i> 98 trees equivalent</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="solutions">
+  <div class="solutions-intro reveal">
+    <span class="section-label">What We Build</span>
+    <h2 class="section-title">Complete Solar Energy <span class="accent">Management Solutions</span></h2>
+    <p class="section-desc">From mobile app development to enterprise SCADA systems — we deliver end-to-end solar software for every market.</p>
+  </div>
+  <div class="solutions-grid reveal">
+    <div class="sol-card"><div class="sol-icon si1">📱</div><div class="sol-title">Mobile App Development</div><div class="sol-desc">Native iOS & Android apps for solar monitoring, remote control, and real-time alerts. Available in 15+ languages for global markets.</div><div class="sol-tags"><span class="sol-tag">iOS</span><span class="sol-tag">Android</span><span class="sol-tag">React Native</span><span class="sol-tag">Flutter</span></div></div>
+    <div class="sol-card"><div class="sol-icon si2">🖥️</div><div class="sol-title">SCADA & Monitoring</div><div class="sol-desc">Real-time SCADA dashboards, IoT sensor integration, predictive maintenance alerts, and automated reporting for utility-scale plants.</div><div class="sol-tags"><span class="sol-tag">IoT</span><span class="sol-tag">SCADA</span><span class="sol-tag">MQTT</span><span class="sol-tag">Modbus</span></div></div>
+    <div class="sol-card"><div class="sol-icon si3">🤖</div><div class="sol-title">AI & Predictive Analytics</div><div class="sol-desc">ML-powered yield forecasting, fault detection, soiling analysis, and performance degradation prediction using satellite weather data.</div><div class="sol-tags"><span class="sol-tag">Machine Learning</span><span class="sol-tag">Python</span><span class="sol-tag">TensorFlow</span></div></div>
+    <div class="sol-card"><div class="sol-icon si4">📊</div><div class="sol-title">Survey & Site Management</div><div class="sol-desc">Digital site assessment, shadow analysis, roof measurement tools, proposal generation, and subsidy calculation for field teams.</div><div class="sol-tags"><span class="sol-tag">GIS</span><span class="sol-tag">Survey</span><span class="sol-tag">Proposals</span></div></div>
+    <div class="sol-card"><div class="sol-icon si5">💰</div><div class="sol-title">Finance & Subsidy Tracking</div><div class="sol-desc">Automate subsidy applications, track government incentives (MNRE, ITC, SARS), net metering revenue, and ROI reporting across all regions.</div><div class="sol-tags"><span class="sol-tag">MNRE</span><span class="sol-tag">ITC Credit</span><span class="sol-tag">Net Metering</span></div></div>
+    <div class="sol-card"><div class="sol-icon si6">🔧</div><div class="sol-title">O&M & Field Service</div><div class="sol-desc">Work order management, technician dispatch, AMC tracking, spare parts inventory, and compliance documentation for O&M teams.</div><div class="sol-tags"><span class="sol-tag">Work Orders</span><span class="sol-tag">AMC</span><span class="sol-tag">Compliance</span></div></div>
+  </div>
+</section>
+
+<section id="dashboard-preview">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom:40px">
+      <span class="section-label">Platform Preview</span>
+      <h2 class="section-title">Your Solar Command <span class="accent">Center</span></h2>
+      <p class="section-desc" style="margin:0 auto">Everything you need to manage every solar asset across every continent, in one powerful dashboard.</p>
+    </div>
+    <div class="dash-wrapper reveal">
+      <div class="dash-titlebar">
+        <div class="win-dots"><div class="win-dot w1"></div><div class="win-dot w2"></div><div class="win-dot w3"></div></div>
+        <div class="dash-url">app.solaraxis.io/dashboard — SolarAxis Management Platform v4.2</div>
+        <div style="font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;">🟢 Live</div>
+      </div>
+      <div class="dash-body">
+        <div class="dash-stat-row">
+          <div class="dstat"><div class="dstat-lbl">CURRENT OUTPUT</div><div class="dstat-val orange">1,247 kW</div><div class="dstat-change">↑ 8.4% vs yesterday</div></div>
+          <div class="dstat"><div class="dstat-lbl">TODAY'S ENERGY</div><div class="dstat-val green">6,840 kWh</div><div class="dstat-change">↑ 12% vs forecast</div></div>
+          <div class="dstat"><div class="dstat-lbl">ACTIVE PLANTS</div><div class="dstat-val blue">48 / 52</div><div class="dstat-change" style="color:var(--sun)">4 in maintenance</div></div>
+          <div class="dstat"><div class="dstat-lbl">REVENUE TODAY</div><div class="dstat-val lime">$2,847</div><div class="dstat-change">↑ 5.2% MTD</div></div>
+        </div>
+        <div class="dash-charts-row">
+          <div class="dash-chart-box">
+            <div class="dcb-title"><span class="dot"></span> Global Generation — Last 24 Hours (kW)</div>
+            <canvas id="dashChart" height="90"></canvas>
+          </div>
+          <div class="dash-chart-box">
+            <div class="dcb-title"><span class="dot" style="background:var(--lime)"></span> Active Regions</div>
+            <div class="world-map-mini" id="worldMap">
+              <div class="map-dot" style="top:35%;left:65%;animation-delay:0s"></div>
+              <div class="map-dot" style="top:30%;left:20%;animation-delay:0.5s"></div>
+              <div class="map-dot" style="top:62%;left:48%;animation-delay:1s"></div>
+              <div class="map-dot" style="top:28%;left:50%;animation-delay:1.5s"></div>
+              <div class="map-dot" style="top:65%;left:78%;animation-delay:2s"></div>
+              <div class="map-dot" style="top:50%;left:32%;animation-delay:2.5s"></div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+              <span style="font-size:11px;color:var(--muted)">🇮🇳 India <b style="color:var(--sun)">842 kW</b></span>
+              <span style="font-size:11px;color:var(--muted)">🇺🇸 USA <b style="color:var(--sun)">234 kW</b></span>
+              <span style="font-size:11px;color:var(--muted)">🇿🇦 SA <b style="color:var(--sun)">171 kW</b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="global">
+  <div class="global-grid">
+    <div class="reveal">
+      <span class="section-label">Global Presence</span>
+      <h2 class="section-title">Built for <span class="accent">Every Market</span> Worldwide</h2>
+      <p class="section-desc">Localized compliance, language support, currency handling, and regulatory frameworks for each market we serve.</p>
+      <div style="margin-top:32px;display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--panel);border:1px solid var(--border2);border-radius:12px;"><span style="font-size:24px">🇮🇳</span><div style="flex:1"><div style="font-weight:700;font-size:14px">India — MNRE Certified Partner</div><div style="font-size:12px;color:var(--muted)">PM Surya Ghar, Net Metering, DISCOM integration</div></div><span style="font-size:12px;color:var(--sun);font-family:'JetBrains Mono',monospace">1.2 GW</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--panel);border:1px solid var(--border2);border-radius:12px;"><span style="font-size:24px">🇺🇸</span><div style="flex:1"><div style="font-weight:700;font-size:14px">USA — ITC & SGIP Compliant</div><div style="font-size:12px;color:var(--muted)">Federal ITC, SGIP, SREC markets, utility integration</div></div><span style="font-size:12px;color:var(--sun);font-family:'JetBrains Mono',monospace">650 MW</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--panel);border:1px solid var(--border2);border-radius:12px;"><span style="font-size:24px">🇿🇦</span><div style="flex:1"><div style="font-weight:700;font-size:14px">South Africa — SSEG Registered</div><div style="font-size:12px;color:var(--muted)">Eskom SSEG, NERSA compliance, loadshedding alerts</div></div><span style="font-size:12px;color:var(--sun);font-family:'JetBrains Mono',monospace">380 MW</span></div>
+        <div style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--panel);border:1px solid var(--border2);border-radius:12px;"><span style="font-size:24px">🌍</span><div style="flex:1"><div style="font-weight:700;font-size:14px">40+ Countries — Custom Compliance</div><div style="font-size:12px;color:var(--muted)">Germany, Australia, UAE, Brazil, UK & more</div></div><span style="font-size:12px;color:var(--sun);font-family:'JetBrains Mono',monospace">170+ MW</span></div>
+      </div>
+    </div>
+    <div class="country-cards reveal">
+      <div class="cc"><div class="cc-flag">🇮🇳</div><div class="cc-country">India</div><div class="cc-role">HQ & Development Hub</div><div class="cc-stat">1,240+</div><div class="cc-stat-lbl">Active Installations</div><div class="cc-services"><span class="cc-service">MNRE</span><span class="cc-service">Net Meter</span><span class="cc-service">PM Surya</span></div></div>
+      <div class="cc"><div class="cc-flag">🇺🇸</div><div class="cc-country">United States</div><div class="cc-role">North America Office</div><div class="cc-stat">680+</div><div class="cc-stat-lbl">Active Installations</div><div class="cc-services"><span class="cc-service">ITC</span><span class="cc-service">SGIP</span><span class="cc-service">SREC</span></div></div>
+      <div class="cc"><div class="cc-flag">🇿🇦</div><div class="cc-country">South Africa</div><div class="cc-role">Africa Regional Hub</div><div class="cc-stat">420+</div><div class="cc-stat-lbl">Active Installations</div><div class="cc-services"><span class="cc-service">SSEG</span><span class="cc-service">NERSA</span><span class="cc-service">Eskom</span></div></div>
+      <div class="cc"><div class="cc-flag">🌏</div><div class="cc-country">Asia Pacific</div><div class="cc-role">AU, JP, SG, MY</div><div class="cc-stat">290+</div><div class="cc-stat-lbl">Active Installations</div><div class="cc-services"><span class="cc-service">CEC</span><span class="cc-service">FiT</span><span class="cc-service">Grid Connect</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="management">
+  <div class="mgmt-grid">
+    <div class="reveal">
+      <span class="section-label">Management System</span>
+      <h2 class="section-title">Every Feature You <span class="accent">Need</span></h2>
+      <p class="section-desc" style="margin-bottom:32px">Comprehensive tools for owners, operators, EPC contractors, and O&M teams worldwide.</p>
+      <div class="feature-list">
+        <div class="feat active"><div class="feat-icon">⚡</div><div><div class="feat-title">Real-Time Plant Monitoring</div><div class="feat-desc">Live kW/kWh data, string-level monitoring, inverter health, and instant fault alerts via SMS/email/WhatsApp.</div></div></div>
+        <div class="feat"><div class="feat-icon">🤖</div><div><div class="feat-title">AI Performance Analysis</div><div class="feat-desc">Automated performance ratio scoring, soiling detection, degradation tracking, and yield gap analysis.</div></div></div>
+        <div class="feat"><div class="feat-icon">📋</div><div><div class="feat-title">Survey & Proposal Tools</div><div class="feat-desc">Digital site surveys, satellite roof measurement, shadow analysis, and automated proposal generation.</div></div></div>
+        <div class="feat"><div class="feat-icon">💰</div><div><div class="feat-title">Financial Management</div><div class="feat-desc">Revenue tracking, subsidy applications, PPA management, ROI dashboards, and billing automation.</div></div></div>
+        <div class="feat"><div class="feat-icon">🔧</div><div><div class="feat-title">O&M & Maintenance</div><div class="feat-desc">Preventive maintenance scheduling, work order management, technician GPS tracking, and AMC billing.</div></div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="mini-dash">
+        <div class="mini-dash-header">
+          <div class="mds-title">☀️ Plant Control Center</div>
+          <div class="live-badge">LIVE</div>
+        </div>
+        <div class="mini-dash-body">
+          <div class="mini-stat-row">
+            <div class="mstat"><div class="mstat-v">847</div><div class="mstat-l">kW NOW</div></div>
+            <div class="mstat"><div class="mstat-v" style="color:var(--green)">92%</div><div class="mstat-l">EFFICIENCY</div></div>
+            <div class="mstat"><div class="mstat-v" style="color:var(--lime)">$214</div><div class="mstat-l">TODAY REV</div></div>
+          </div>
+          <div class="power-meter">
+            <div class="pm-header">
+              <span class="pm-title">⚡ Inverter Output</span>
+              <span class="pm-value" id="pm-live">847 kW</span>
+            </div>
+            <div class="pm-bar-wrap"><div class="pm-bar" id="pm-bar"></div></div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">PANEL ARRAY STATUS — 36 UNITS</div>
+          <div class="panel-grid-mini" id="panel-grid"></div>
+          <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">RECENT EVENTS</div>
+          <div class="alert-rows">
+            <div class="alert-row"><div class="ar-dot" style="background:var(--green)"></div><span class="ar-msg">Panel Array A — Output nominal</span><span class="ar-time">2m ago</span></div>
+            <div class="alert-row"><div class="ar-dot" style="background:var(--sun)"></div><span class="ar-msg">Inverter I-03 temp 52°C warning</span><span class="ar-time">14m ago</span></div>
+            <div class="alert-row"><div class="ar-dot" style="background:var(--green)"></div><span class="ar-msg">Daily report generated & emailed</span><span class="ar-time">1h ago</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="calculator">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom:40px">
+      <span class="section-label">Solar Calculator</span>
+      <h2 class="section-title">Calculate Your <span class="accent">Solar Savings</span></h2>
+      <p class="section-desc" style="margin:0 auto">Instant ROI calculation for any country, any market rate, any system size.</p>
+    </div>
+    <div class="calc-container">
+      <div class="calc-box reveal">
+        <div class="calc-header">
+          <div>
+            <div style="font-family:'Clash Display',sans-serif;font-size:20px;font-weight:700">☀️ Solar ROI Calculator</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:4px">Accurate estimates for 40+ countries</div>
+          </div>
+          <button class="btn btn-lime" onclick="calcSolar()">Calculate Now →</button>
+        </div>
+        <div class="calc-body">
+          <div class="calc-grid">
+            <div class="calc-field"><label>Monthly Electricity Bill</label><input id="cb-bill" type="number" placeholder="e.g. 5000" oninput="calcSolar()"></div>
+            <div class="calc-field"><label>Currency / Country</label><select id="cb-country" onchange="calcSolar()"><option value="IN">🇮🇳 India (₹ INR)</option><option value="US">🇺🇸 USA ($ USD)</option><option value="ZA">🇿🇦 South Africa (R ZAR)</option><option value="AU">🇦🇺 Australia (A$ AUD)</option><option value="DE">🇩🇪 Germany (€ EUR)</option><option value="AE">🇦🇪 UAE (AED)</option></select></div>
+            <div class="calc-field"><label>Available Roof Area (sq ft)</label><input id="cb-area" type="number" placeholder="e.g. 1000" oninput="calcSolar()"></div>
+            <div class="calc-field"><label>Property Type</label><select id="cb-prop" onchange="calcSolar()"><option value="res">Residential</option><option value="com">Commercial</option><option value="ind">Industrial</option></select></div>
+          </div>
+          <div class="calc-result-grid" id="calc-results">
+            <div class="cr-card"><div class="cr-val">—</div><div class="cr-lbl">System Size (kW)</div></div>
+            <div class="cr-card"><div class="cr-val">—</div><div class="cr-lbl">Monthly Savings</div></div>
+            <div class="cr-card"><div class="cr-val">—</div><div class="cr-lbl">Payback Period</div></div>
+            <div class="cr-card"><div class="cr-val">—</div><div class="cr-lbl">25-Year Savings</div></div>
+            <div class="cr-card"><div class="cr-val">—</div><div class="cr-lbl">CO₂ Saved/Year</div></div>
+            <div class="cr-card"><div class="cr-val">—</div><div class="cr-lbl">System Cost (Net)</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="process-intro reveal">
+    <span class="section-label">How It Works</span>
+    <h2 class="section-title">From Survey to <span class="accent">Savings</span></h2>
+    <p class="section-desc" style="margin:0 auto">Our proven 4-step process gets your solar management platform live in days, not months.</p>
+  </div>
+  <div class="process-steps reveal">
+    <div class="pstep"><div class="pstep-num">01</div><div class="pstep-icon">🔍</div><div class="pstep-title">Site Survey</div><div class="pstep-desc">Digital survey with satellite imagery, shadow analysis, and automated system sizing for any location globally.</div></div>
+    <div class="pstep"><div class="pstep-num">02</div><div class="pstep-icon">⚙️</div><div class="pstep-title">System Setup</div><div class="pstep-desc">Configure your plant in our platform — connect IoT devices, set alerts, and customize dashboards for your team.</div></div>
+    <div class="pstep"><div class="pstep-num">03</div><div class="pstep-icon">📡</div><div class="pstep-title">Go Live & Monitor</div><div class="pstep-desc">Real-time monitoring begins instantly. AI analyzes performance and sends alerts before issues affect output.</div></div>
+    <div class="pstep"><div class="pstep-num">04</div><div class="pstep-icon">📈</div><div class="pstep-title">Optimize & Grow</div><div class="pstep-desc">Monthly AI reports, automated subsidy filing, and performance optimization maximize your returns continuously.</div></div>
+  </div>
+</section>
+
+<section id="solar-science" class="science-hero">
+  <span class="section-label" style="display:block;text-align:center">Solar Science &amp; UV Knowledge</span>
+  <h2 class="section-title" style="text-align:center">How the <span class="accent">Sun Powers</span> Your World</h2>
+  <p class="section-desc" style="margin:0 auto 48px;text-align:center">A deep dive into the science behind solar energy — from nuclear fusion in the sun's core to electricity flowing through your home.</p>
+  <div class="sun-display">
+    <div class="sun-ring"></div>
+    <div class="sun-ring"></div>
+    <div class="sun-ring"></div>
+    <div class="sun-core"></div>
+  </div>
+  <div class="fact-ticker">
+    <div class="ticker-label">☀️ SOLAR FACTS</div>
+    <div class="ticker-content">
+      <div class="ticker-inner">
+        <span>🌞 The Sun is <b>4.6 billion years old</b> and has enough fuel for another 5 billion years</span>
+        <span>⚡ Solar panels convert <b>15–22% of sunlight</b> into electricity</span>
+        <span>🌍 Earth receives <b>173,000 terawatts</b> of solar energy — 10,000× global power demand</span>
+        <span>🔬 UV radiation accounts for <b>10% of total solar output</b></span>
+        <span>💡 The first silicon solar cell was created at <b>Bell Labs in 1954</b></span>
+        <span>🚀 Solar energy in space reaches <b>1,361 W/m²</b> (solar constant)</span>
+        <span>🌡️ At Earth's surface, usable irradiance is about <b>1,000 W/m²</b> on a clear day</span>
+        <span>🌞 The Sun is <b>4.6 billion years old</b> and has enough fuel for another 5 billion years</span>
+        <span>⚡ Solar panels convert <b>15–22% of sunlight</b> into electricity</span>
+        <span>🌍 Earth receives <b>173,000 terawatts</b> of solar energy — 10,000× global power demand</span>
+        <span>🔬 UV radiation accounts for <b>10% of total solar output</b></span>
+      </div>
+    </div>
+  </div>
+  <div class="info-grid cols-4" style="margin-bottom:0">
+    <div class="info-card" style="text-align:center"><span class="ic-icon">🌡️</span><div class="ic-tag tag-sci">CORE TEMPERATURE</div><div class="ic-title">15 Million °C</div><div class="ic-desc">The Sun's core where nuclear fusion converts hydrogen to helium, releasing immense energy as photons that take 100,000 years to reach the surface.</div></div>
+    <div class="info-card" style="text-align:center"><span class="ic-icon">⚡</span><div class="ic-tag tag-pv">POWER OUTPUT</div><div class="ic-title">3.86 × 10²⁶ Watts</div><div class="ic-desc">The Sun's total luminosity — equivalent to detonating 9.15 × 10¹⁰ megatons of TNT every single second, continuously for billions of years.</div></div>
+    <div class="info-card" style="text-align:center"><span class="ic-icon">🚀</span><div class="ic-tag tag-sci">LIGHT TRAVEL TIME</div><div class="ic-title">8 Min 20 Sec</div><div class="ic-desc">Time for sunlight to travel 149.6 million km from the Sun's surface to Earth at the speed of light (299,792 km/s).</div></div>
+    <div class="info-card" style="text-align:center"><span class="ic-icon">📡</span><div class="ic-tag tag-pv">SOLAR CONSTANT</div><div class="ic-title">1,361 W/m²</div><div class="ic-desc">Total solar irradiance (TSI) measured above Earth's atmosphere. At the surface after atmosphere absorption, it's ~1,000 W/m² on a clear day.</div></div>
+  </div>
+</section>
+
+<section id="uv-science" style="padding:60px 5% 80px">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:48px">
+      <span class="section-label">Electromagnetic Spectrum</span>
+      <h2 class="section-title">The Full Solar <span class="accent">Spectrum</span></h2>
+      <p class="section-desc" style="margin-bottom:24px">Sunlight is not just visible light — it's a broad spectrum of electromagnetic radiation. Solar panels interact with different parts of this spectrum in distinct ways.</p>
+      <div class="spectrum-labels">
+        <span style="color:#aa44ff">UV-C (100–280nm)</span>
+        <span style="color:#cc88ff">UV-B (280–315nm)</span>
+        <span style="color:#ddaaff">UV-A (315–400nm)</span>
+        <span style="color:#FFD166">Visible (400–700nm)</span>
+        <span style="color:#FF9944">Near-IR (700–1400nm)</span>
+        <span style="color:#cc4400">Mid/Far IR (1400nm+)</span>
+      </div>
+      <div class="spectrum-bar"></div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted)">
+        <span>100nm</span><span>400nm</span><span>700nm</span><span>1400nm</span><span>3000nm+</span>
+      </div>
+      <div class="eff-breakdown" style="margin-top:20px">
+        <div style="font-family:'Clash Display',sans-serif;font-size:16px;font-weight:700;margin-bottom:18px">☀️ How Sunlight Energy is Distributed</div>
+        <div class="eff-row"><div class="eff-label" style="color:#aa44ff">UV Radiation (UV-A + UV-B)</div><div class="eff-bar-wrap"><div class="eff-bar-fill" style="width:7%;background:linear-gradient(90deg,#8800ff,#cc88ff)"></div></div><div class="eff-val">~7%</div></div>
+        <div class="eff-row"><div class="eff-label" style="color:#FFD166">Visible Light (400–700nm)</div><div class="eff-bar-wrap"><div class="eff-bar-fill" style="width:46%;background:linear-gradient(90deg,#4488ff,#FFD166,#ff4400)"></div></div><div class="eff-val">~46%</div></div>
+        <div class="eff-row"><div class="eff-label" style="color:#FF9944">Near-Infrared (700–1400nm)</div><div class="eff-bar-wrap"><div class="eff-bar-fill" style="width:37%;background:linear-gradient(90deg,#FF6B00,#cc3300)"></div></div><div class="eff-val">~37%</div></div>
+        <div class="eff-row"><div class="eff-label" style="color:#884422">Mid/Far Infrared (1400nm+)</div><div class="eff-bar-wrap"><div class="eff-bar-fill" style="width:10%;background:#663322"></div></div><div class="eff-val">~10%</div></div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <span class="section-label">UV Radiation Types</span>
+      <h2 class="section-title">UV Rays: <span class="accent">Types &amp; Impact</span></h2>
+      <p class="section-desc" style="margin-bottom:24px">Ultraviolet radiation is invisible to the human eye but critically important for solar panel science, material degradation, and energy generation.</p>
+      <div class="uv-tabs">
+        <div class="uv-tab t-uvc active" onclick="switchUV('uvc',this)">UV-C</div>
+        <div class="uv-tab t-uvb" onclick="switchUV('uvb',this)">UV-B</div>
+        <div class="uv-tab t-uva" onclick="switchUV('uva',this)">UV-A</div>
+        <div class="uv-tab t-vis" onclick="switchUV('vis',this)">Visible</div>
+        <div class="uv-tab t-ir"  onclick="switchUV('ir', this)">Infrared</div>
+      </div>
+      <div class="uv-panel active" id="uvp-uvc">
+        <div class="info-card uvc"><span class="ic-tag tag-uvc">UV-C • 100–280 nm</span><div class="ic-icon">🛡️</div><div class="ic-title">UV-C — Completely Blocked by Ozone</div><div class="ic-desc">UV-C is the most energetic and dangerous ultraviolet radiation. With wavelengths between 100–280 nanometres, it carries enough energy to break DNA strands instantly. Fortunately, Earth's ozone layer (O₃) in the stratosphere absorbs virtually all UV-C before it reaches the surface.<br><br>In solar technology, UV-C is used in sterilization lamps and accelerated aging tests for photovoltaic encapsulants to simulate decades of solar exposure in weeks.</div><div class="ic-stat"><div class="ic-stat-val">0%</div><div class="ic-stat-lbl">reaches Earth's surface (absorbed by ozone)</div></div></div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="info-card"><span class="ic-tag tag-uvc">PHOTON ENERGY</span><div class="ic-title">4.4 – 12.4 eV</div><div class="ic-desc">UV-C photons carry enormous energy — enough to ionize atoms and molecules. This is why UV-C is germicidal and why ozone absorption is so critical for life on Earth.</div></div>
+          <div class="info-card"><span class="ic-tag tag-sci">SOLAR TECH USE</span><div class="ic-title">Accelerated UV Testing</div><div class="ic-desc">Solar panel manufacturers use UV-C chambers to simulate 25 years of outdoor exposure in just weeks. IEC 61215 and IEC 61730 standards require UV durability testing for certified panels.</div></div>
+          <div class="info-card"><span class="ic-tag tag-uvc">WAVELENGTH</span><div class="ic-title">100 – 280 nm</div><div class="ic-desc">UV-C wavelengths are shorter than any visible light. For reference, violet visible light starts at ~380 nm — UV-C is nearly 4× shorter, carrying proportionally more energy per photon.</div></div>
+        </div>
+      </div>
+      <div class="uv-panel" id="uvp-uvb">
+        <div class="info-card uvb"><span class="ic-tag tag-uvb">UV-B • 280–315 nm</span><div class="ic-icon">⚗️</div><div class="ic-title">UV-B — Partially Reaches Earth</div><div class="ic-desc">UV-B is partially absorbed by the ozone layer — about 5% reaches Earth's surface. It's responsible for sunburn, vitamin D synthesis, and the photodegradation of materials like plastics, EVA encapsulants, and backsheets in solar panels.<br><br>Solar panel manufacturers must engineer encapsulants and anti-reflective coatings to withstand 25+ years of UV-B exposure without yellowing, delamination, or power loss.</div><div class="ic-stat"><div class="ic-stat-val">~5%</div><div class="ic-stat-lbl">of UV-B reaches Earth's surface</div></div></div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="info-card"><span class="ic-tag tag-uvb">PANEL DEGRADATION</span><div class="ic-title">EVA Yellowing &amp; PID</div><div class="ic-desc">UV-B causes photo-oxidation of EVA (ethylene-vinyl acetate) encapsulant, leading to yellowing that reduces light transmission and output. Modern panels use UV-stabilised POE or UV-resistant EVA to combat this.</div></div>
+          <div class="info-card"><span class="ic-tag tag-sci">OZONE SENSITIVITY</span><div class="ic-title">1% Ozone Loss = 2% More UV-B</div><div class="ic-desc">Every 1% decrease in stratospheric ozone allows approximately 2% more UV-B to reach Earth's surface. This directly affects solar panel degradation rates in high-altitude or polar installations.</div></div>
+          <div class="info-card"><span class="ic-tag tag-uvb">ENERGY</span><div class="ic-title">3.9 – 4.4 eV per Photon</div><div class="ic-desc">UV-B photons have just enough energy to cause chemical changes in organic molecules — the basis of both sunburn and material degradation in solar components.</div></div>
+        </div>
+      </div>
+      <div class="uv-panel" id="uvp-uva">
+        <div class="info-card uva"><span class="ic-tag tag-uva">UV-A • 315–400 nm</span><div class="ic-icon">🔆</div><div class="ic-title">UV-A — The Key Solar Energy Contributor</div><div class="ic-desc">UV-A is the most abundant UV radiation reaching Earth's surface — about 95% of all UV. Unlike UV-B, it's not significantly absorbed by ozone. UV-A is highly relevant to solar panels because silicon photovoltaic cells can absorb photons down to approximately 300nm, meaning UV-A photons contribute directly to electricity generation.<br><br>However, prolonged UV-A exposure also contributes to slow degradation of encapsulants and can cause light-induced degradation (LID) in certain cell types.</div><div class="ic-stat"><div class="ic-stat-val">~95%</div><div class="ic-stat-lbl">of UV reaching Earth is UV-A (315–400nm)</div></div></div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="info-card"><span class="ic-tag tag-pv">PV GENERATION</span><div class="ic-title">UV-A Powers Solar Cells</div><div class="ic-desc">Silicon solar cells respond to wavelengths from ~300nm to ~1100nm. UV-A photons (315–400nm) are within this range and generate electron-hole pairs, contributing to electricity output — especially relevant on overcast days when UV-A penetrates clouds better than visible light.</div></div>
+          <div class="info-card"><span class="ic-tag tag-uva">CLOUD PENETRATION</span><div class="ic-title">Panels Work on Cloudy Days</div><div class="ic-desc">UV-A and diffuse visible light penetrate cloud cover. This is why solar panels generate 10–25% of their rated power even on overcast days — the UV component still reaches the cells and generates electricity.</div></div>
+          <div class="info-card"><span class="ic-tag tag-sci">AR COATINGS</span><div class="ic-title">AR Coatings Capture UV-A</div><div class="ic-desc">Modern solar panels use silicon nitride (Si₃N₄) anti-reflective coatings specifically tuned to minimise reflection across 300–1100nm, including the UV-A range, maximising photon absorption and efficiency.</div></div>
+        </div>
+      </div>
+      <div class="uv-panel" id="uvp-vis">
+        <div class="info-card vis"><span class="ic-tag tag-vis">VISIBLE • 400–700 nm</span><div class="ic-icon">🌈</div><div class="ic-title">Visible Light — Primary Solar Power Source</div><div class="ic-desc">Visible light (400–700nm) carries 46% of total solar energy and is the primary driver of PV electricity generation. Silicon solar cells are most efficient in the 400–900nm range, with peak spectral response around 800–900nm.<br><br>The photovoltaic effect works when visible photons — particularly red and near-infrared — excite electrons in silicon from the valence band to the conduction band, creating electrical current.</div><div class="ic-stat"><div class="ic-stat-val">46%</div><div class="ic-stat-lbl">of solar energy arrives as visible light</div></div></div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="info-card"><span class="ic-tag tag-vis">BANDGAP PHYSICS</span><div class="ic-title">Silicon Bandgap: 1.12 eV</div><div class="ic-desc">Silicon has a bandgap of 1.12 electron-volts. Photons with energy above 1.12 eV (wavelengths below ~1100nm) can excite electrons. The blue end of visible light has excess energy that becomes heat; red light is near-optimal for silicon cells.</div></div>
+          <div class="info-card"><span class="ic-tag tag-pv">SPECTRAL MISMATCH</span><div class="ic-title">Blue Light = Wasted Energy</div><div class="ic-desc">High-energy blue photons (400–500nm) excite electrons but their excess energy becomes heat rather than electricity — this is called thermalisation loss. Multi-junction solar cells mitigate this by using different materials tuned to different wavelengths.</div></div>
+          <div class="info-card"><span class="ic-tag tag-sci">AM1.5 STANDARD</span><div class="ic-title">The AM1.5G Test Standard</div><div class="ic-desc">All solar panels are rated under the AM1.5G spectrum — sunlight passing through 1.5 atmospheres (38° angle), representing average mid-latitude conditions. This gives 1,000 W/m² for standardised testing.</div></div>
+        </div>
+      </div>
+      <div class="uv-panel" id="uvp-ir">
+        <div class="info-card ir"><span class="ic-tag tag-ir">INFRARED • 700nm–3000nm</span><div class="ic-icon">🔥</div><div class="ic-title">Infrared — Heat &amp; Near-IR Power</div><div class="ic-desc">Infrared radiation (IR) constitutes ~53% of total solar energy. Near-IR (700–1100nm) is critically important for silicon solar cells — silicon has peak spectral response at 800–950nm, making near-IR its most efficient generation zone.<br><br>Mid and Far IR (above 1400nm) is mostly converted to heat in the panel, contributing to cell temperature rise. Every 1°C above 25°C reduces panel output by ~0.4%.</div><div class="ic-stat"><div class="ic-stat-val">~53%</div><div class="ic-stat-lbl">of solar energy is infrared radiation</div></div></div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="info-card"><span class="ic-tag tag-ir">TEMPERATURE COEFFICIENT</span><div class="ic-title">Heat = Lost Power</div><div class="ic-desc">Standard silicon panels lose ~0.35–0.45% output per °C above 25°C (STC). A panel at 65°C on a hot summer day loses 16–18% of rated power. Adequate ventilation and bifacial panels help.</div></div>
+          <div class="info-card"><span class="ic-tag tag-pv">BIFACIAL ADVANTAGE</span><div class="ic-title">Capturing Albedo IR</div><div class="ic-desc">Bifacial solar panels capture IR reflected from the ground (albedo). White gravel, snow, or sand can reflect 20–80% of incident light, boosting bifacial panel output by 5–30%.</div></div>
+          <div class="info-card"><span class="ic-tag tag-sci">THERMAL IMAGING</span><div class="ic-title">IR Cameras Find Hotspots</div><div class="ic-desc">Our management platform integrates drone-based infrared thermal imaging to detect hotspot defects, bypass diode failures, and delamination in solar panels — faults invisible to the naked eye but bright in IR cameras.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how-panels-work" style="padding:60px 5% 80px;background:linear-gradient(180deg,transparent,rgba(245,166,35,0.03),transparent)">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom:48px">
+      <span class="section-label">Photovoltaic Science</span>
+      <h2 class="section-title">How Solar Panels <span class="accent">Work</span></h2>
+      <p class="section-desc" style="margin:0 auto">From photon to power outlet — the complete journey of sunlight through a photovoltaic system.</p>
+    </div>
+    <div class="flow-diagram reveal" style="margin-bottom:40px">
+      <div class="flow-node"><div class="fn-icon">☀️</div><div class="fn-title">Sunlight</div><div class="fn-desc">Photons emitted</div></div>
+      <div class="flow-node"><div class="fn-icon">🔵</div><div class="fn-title">PV Cell</div><div class="fn-desc">P-N junction absorption</div></div>
+      <div class="flow-node"><div class="fn-icon">⚡</div><div class="fn-title">DC Power</div><div class="fn-desc">Electron flow created</div></div>
+      <div class="flow-node"><div class="fn-icon">🔄</div><div class="fn-title">Inverter</div><div class="fn-desc">DC → AC conversion</div></div>
+      <div class="flow-node"><div class="fn-icon">🏠</div><div class="fn-title">Your Home</div><div class="fn-desc">Clean electricity</div></div>
+      <div class="flow-node"><div class="fn-icon">🔌</div><div class="fn-title">Grid Export</div><div class="fn-desc">Net metering credit</div></div>
+    </div>
+    <div class="panel-anatomy reveal">
+      <div class="layer-diagram">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:12px;letter-spacing:1px">SOLAR PANEL CROSS-SECTION</div>
+        <div class="layer-stack">
+          <div class="layer l-frame"><div><div class="layer-label">Aluminium Frame</div><div class="layer-sub">Structural support & grounding</div></div><div class="layer-thickness">3–4 mm</div></div>
+          <div class="layer l-glass" style="position:relative;overflow:hidden"><div><div class="layer-label" style="color:#93C5FD">Tempered Low-Iron Glass</div><div class="layer-sub">Anti-reflective coating (SiNₓ)</div></div><div class="layer-thickness" style="color:#93C5FD">3.2 mm</div><div class="photon" style="left:20%;animation-delay:0s"></div><div class="photon" style="left:55%;animation-delay:0.7s"></div><div class="photon" style="left:80%;animation-delay:1.4s"></div></div>
+          <div class="layer l-encap"><div><div class="layer-label">EVA / POE Encapsulant</div><div class="layer-sub">UV-stabilised, weatherproof bonding</div></div><div class="layer-thickness">0.5 mm</div></div>
+          <div class="layer l-pv"><div><div class="layer-label" style="color:var(--gold)">⚡ Silicon PV Cells</div><div class="layer-sub">P-N junction — photovoltaic effect</div></div><div class="layer-thickness" style="color:var(--gold)">180 µm</div></div>
+          <div class="layer l-bsf"><div><div class="layer-label">Back Surface Field (BSF)</div><div class="layer-sub">Electron reflector — reduces recombination</div></div><div class="layer-thickness">Al-BSF</div></div>
+          <div class="layer l-encap2"><div><div class="layer-label">EVA / POE Encapsulant (rear)</div><div class="layer-sub">Moisture barrier and adhesion</div></div><div class="layer-thickness">0.5 mm</div></div>
+          <div class="layer l-back"><div><div class="layer-label">Backsheet / Glass</div><div class="layer-sub">TPE/TPT or bifacial glass</div></div><div class="layer-thickness">0.3 mm</div></div>
+        </div>
+        <div style="margin-top:16px;font-size:12px;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace">Hover each layer for details • Animated photons show light path ↓</div>
+      </div>
+      <div class="layer-steps">
+        <div class="lstep"><div class="lstep-num">1</div><div><div class="lstep-title">Photon Absorption</div><div class="lstep-desc">Sunlight (photons) strikes the anti-reflective coated tempered glass and passes through to the silicon PV cell. The AR coating reduces reflection from ~30% (bare silicon) to less than 3%, trapping maximum light.</div></div></div>
+        <div class="lstep"><div class="lstep-num">2</div><div><div class="lstep-title">Electron Excitation (Photoelectric Effect)</div><div class="lstep-desc">When a photon with energy ≥ 1.12 eV (silicon bandgap) hits the P-N junction, it knocks an electron free from its bond, creating an electron-hole pair. This is the fundamental photovoltaic effect, described by Einstein in 1905 (Nobel Prize 1921).</div></div></div>
+        <div class="lstep"><div class="lstep-num">3</div><div><div class="lstep-title">Electric Field Separation</div><div class="lstep-desc">The P-N junction creates a built-in electric field. This field sweeps electrons toward the N-type layer (negative) and holes toward the P-type layer (positive), preventing recombination and driving directional current flow.</div></div></div>
+        <div class="lstep"><div class="lstep-num">4</div><div><div class="lstep-title">DC Current Collection</div><div class="lstep-desc">Metal fingers (silver busbars) on the front and rear collect the electrons and route them through external circuits. Multiple cells are connected in series (strings) to build voltage, and strings in parallel to build current.</div></div></div>
+        <div class="lstep"><div class="lstep-num">5</div><div><div class="lstep-title">Inverter Conversion (DC → AC)</div><div class="lstep-desc">The string inverter or microinverter converts direct current (DC) from panels to alternating current (AC) at grid frequency (50Hz/60Hz). Modern inverters achieve 97–99% conversion efficiency with MPPT optimisation.</div></div></div>
+      </div>
+    </div>
+    <div class="big-quote reveal">
+      <div class="bq-text">Every hour, the sun delivers enough energy to power <span class="accent">human civilisation for an entire year.</span><br>Solar panels are our key to unlocking it.</div>
+      <div class="bq-source">— Dr. Hermann Scheer, Renewable Energy Advocate &amp; German MP</div>
+    </div>
+    <div class="reveal" style="margin-bottom:40px">
+      <div class="text-center" style="margin-bottom:28px">
+        <span class="section-label">Panel Technology</span>
+        <h3 class="section-title" style="font-size:clamp(24px,3vw,38px)">Types of Solar <span class="accent">Panel Technology</span></h3>
+      </div>
+      <div class="comp-grid">
+        <div class="comp-card"><div class="cc-type">TRADITIONAL</div><div class="cc-name">Monocrystalline</div><div class="cc-eff">20–23%</div><div class="cc-eff-lbl">EFFICIENCY RANGE</div><div class="cc-bullets"><div class="cc-bullet">Single silicon crystal lattice — uniform dark colour</div><div class="cc-bullet">Best performance in high temperatures</div><div class="cc-bullet">Best space efficiency (ideal for small roofs)</div><div class="cc-bullet">Higher cost — premium choice</div><div class="cc-bullet">25–30 year lifespan warranty common</div></div></div>
+        <div class="comp-card featured"><div class="cc-type">MOST POPULAR</div><div class="cc-name">PERC / TOPCon</div><div class="cc-eff">21–24%</div><div class="cc-eff-lbl">EFFICIENCY RANGE</div><div class="cc-bullets"><div class="cc-bullet">Passivated Emitter Rear Cell technology</div><div class="cc-bullet">Captures light reflected from rear surface</div><div class="cc-bullet">TOPCon adds tunnel oxide for even less recombination</div><div class="cc-bullet">Best value for commercial &amp; utility scale</div><div class="cc-bullet">Dominant global technology (2023–present)</div></div></div>
+        <div class="comp-card"><div class="cc-type">PREMIUM</div><div class="cc-name">HJT / IBC</div><div class="cc-eff">23–26%</div><div class="cc-eff-lbl">EFFICIENCY RANGE</div><div class="cc-bullets"><div class="cc-bullet">Heterojunction Technology (HJT): amorphous + crystalline silicon</div><div class="cc-bullet">IBC: all contacts on rear — zero shading losses</div><div class="cc-bullet">Excellent low-light and high-temperature performance</div><div class="cc-bullet">Lowest degradation rate (&lt;0.3%/year)</div><div class="cc-bullet">Premium cost — used in space-constrained premium installs</div></div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div style="overflow-x:auto">
+        <table class="sci-table">
+          <thead><tr><th>Parameter</th><th>Typical Value</th><th>Best-in-Class</th><th>Why It Matters</th></tr></thead>
+          <tbody>
+            <tr><td>Cell Efficiency</td><td>20–22%</td><td>26.7% (IBC lab)</td><td>Higher % = more power per sqm of roof</td></tr>
+            <tr><td>Temperature Coefficient (Pmax)</td><td>-0.35% /°C</td><td>-0.24% /°C (HJT)</td><td>Less power loss on hot days</td></tr>
+            <tr><td>Degradation Rate</td><td>0.5–0.7% /year</td><td>&lt;0.3% /year (HJT)</td><td>Determines 25-year output warranty</td></tr>
+            <tr><td>Fill Factor (FF)</td><td>78–82%</td><td>&gt;85% (IBC/HJT)</td><td>How well cell converts absorbed light to power</td></tr>
+            <tr><td>Open Circuit Voltage (Voc)</td><td>44–50V (60-cell)</td><td>Up to 75V (TOPCon)</td><td>Affects string design and inverter selection</td></tr>
+            <tr><td>Panel Wattage</td><td>400–550W</td><td>730W (2024, bifacial)</td><td>Higher W = fewer panels, lower BOS cost</td></tr>
+            <tr><td>UV Resistance (IEC 61215)</td><td>15 kWh/m² UV test</td><td>&gt;30 kWh/m² extended</td><td>Ensures 25-year encapsulant durability</td></tr>
+            <tr><td>Hail Resistance</td><td>25mm at 23 m/s</td><td>35mm (premium glass)</td><td>Critical for South Africa, India, Texas storms</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="uv-index" style="padding:60px 5% 80px">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:40px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start">
+        <div>
+          <span class="section-label">UV Index &amp; Solar Resource</span>
+          <h2 class="section-title">UV Index: What It <span class="accent">Means for Solar</span></h2>
+          <p class="section-desc" style="margin-bottom:20px">The UV Index (UVI) quantifies the intensity of UV radiation at a location. High UV Index means more solar irradiance — which means better solar panel performance and generation potential.</p>
+          <div class="uv-index-widget">
+            <div style="font-size:13px;font-weight:700;margin-bottom:8px">🌍 Global UV Index Scale</div>
+            <div class="uvi-scale">
+              <div class="uvi-seg g1"></div><div class="uvi-seg g2"></div><div class="uvi-seg y"></div>
+              <div class="uvi-seg o1"></div><div class="uvi-seg o2"></div><div class="uvi-seg r1"></div>
+              <div class="uvi-seg r2"></div><div class="uvi-seg v"></div><div class="uvi-seg v2"></div>
+              <div class="uvi-seg v3"></div><div class="uvi-seg v4"></div>
+            </div>
+            <div class="uvi-labels"><span>1</span><span>3</span><span>5</span><span>7</span><span>9</span><span>11</span><span>13+</span></div>
+            <div class="uvi-legend">
+              <div class="uvi-item"><div class="uvi-dot" style="background:#22C55E"></div> Low (1–2)</div>
+              <div class="uvi-item"><div class="uvi-dot" style="background:#EAB308"></div> Moderate (3–5)</div>
+              <div class="uvi-item"><div class="uvi-dot" style="background:#F97316"></div> High (6–7)</div>
+              <div class="uvi-item"><div class="uvi-dot" style="background:#DC2626"></div> Very High (8–10)</div>
+              <div class="uvi-item"><div class="uvi-dot" style="background:#7C3AED"></div> Extreme (11+)</div>
+            </div>
+          </div>
+          <div class="stat-pills" style="margin-top:20px">
+            <div class="stat-pill"><span class="stat-pill-val">🇮🇳</span> India: UVI 8–12 (peak)</div>
+            <div class="stat-pill"><span class="stat-pill-val">🇿🇦</span> SA: UVI 10–14 (extreme)</div>
+            <div class="stat-pill"><span class="stat-pill-val">🇺🇸</span> USA: UVI 6–11 (varies)</div>
+            <div class="stat-pill"><span class="stat-pill-val">🇦🇺</span> Australia: UVI 12–14 (highest)</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="info-card">
+            <span class="ic-tag tag-sci">GLOBAL IRRADIANCE (GHI)</span>
+            <div class="ic-title">Peak Sun Hours by Region</div>
+            <div style="margin-top:12px">
+              <div class="eff-row" style="margin-bottom:10px"><div class="eff-label" style="width:160px;font-size:12px">🇮🇳 Rajasthan, India</div><div class="eff-bar-wrap"><div class="eff-bar-fill" style="width:94%;background:linear-gradient(90deg,var(--sun),var(--gold))"></div></div><div class="eff-val">5.8 h</div></div>
+              <div class="eff-row" style="margin-bottom:10px"><div class="eff-label" style="width:160px;font-size:12px">🇿🇦 Upington, SA</div><div class="eff-bar-wrap"><div class="eff-bar-fill" style="width:98%;background:linear-gradient(90deg,var(--sun),var(--gold))"></div></div><div class="eff-val">6.2 h</div></div>
+              <div class="eff-row" style="margin-bottom:10px"><div class="eff-label" style="width:160px;font-size:12px">🇦🇪 Dubai, UAE</div><div class="eff-bar-wrap"><div class="eff-bar-fill" style="width:88%;background:linear-gradient(90deg,var(--sun),var(--gold))"></div></div><div class="eff-val">5.6 h</div></div>
+              <div class="eff-row" style="margin-bottom:10px"><div class="eff-label" style="width:160px;font-size:12px">🇺🇸 Phoenix, USA</div><div class="eff-bar-wrap"><div class="eff-bar-fill" style="width:85%;background:linear-gradient(90deg,#F59E0B,#F97316)"></div></div><div class="eff-val">5.4 h</div></div>
+              <div class="eff-row" style="margin-bottom:10px"><div class="eff-label" style="width:160px;font-size:12px">🇦🇺 Perth, Australia</div><div class="eff-bar-wrap"><div class="eff-bar-fill" style="width:96%;background:linear-gradient(90deg,var(--sun),var(--gold))"></div></div><div class="eff-val">6.1 h</div></div>
+              <div class="eff-row" style="margin-bottom:10px"><div class="eff-label" style="width:160px;font-size:12px">🇩🇪 Munich, Germany</div><div class="eff-bar-wrap"><div class="eff-bar-fill" style="width:56%;background:linear-gradient(90deg,#60A5FA,#93C5FD)"></div></div><div class="eff-val">3.6 h</div></div>
+              <div class="eff-row"><div class="eff-label" style="width:160px;font-size:12px">🇬🇧 London, UK</div><div class="eff-bar-wrap"><div class="eff-bar-fill" style="width:43%;background:linear-gradient(90deg,#60A5FA,#93C5FD)"></div></div><div class="eff-val">2.8 h</div></div>
+            </div>
+          </div>
+          <div class="info-card"><span class="ic-tag tag-pv">HIGH UV = MORE POWER</span><div class="ic-title">UVI's Direct Relationship to Solar Yield</div><div class="ic-desc">A location with UV Index 10 (Very High) generates roughly 2–3× more annual solar energy than a UV Index 4 location. This is why India, South Africa, Australia, and the Middle East lead global solar installations — their UV intensity makes solar the cheapest electricity source.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="text-center" style="margin-bottom:28px">
+        <span class="section-label">Did You Know?</span>
+        <h3 class="section-title" style="font-size:clamp(22px,3vw,36px)">Solar Science <span class="accent">Facts</span></h3>
+      </div>
+      <div class="info-grid">
+        <div class="info-card"><span class="ic-icon">🌙</span><div class="ic-tag tag-sci">NIGHT GENERATION</div><div class="ic-title">Panels Work Without Direct Sunlight</div><div class="ic-desc">Solar panels generate electricity from diffuse light — scattered UV and visible light from clouds, haze, and the sky dome. On a fully overcast day, panels still produce 10–25% of rated output.</div></div>
+        <div class="info-card"><span class="ic-icon">❄️</span><div class="ic-tag tag-pv">COLD WEATHER</div><div class="ic-title">Cold + Sunny = Best Performance</div><div class="ic-desc">Solar panels are more efficient in cold weather. At 0°C vs 25°C (STC), a panel with -0.4%/°C coefficient produces 10% more power. Snow-covered mountains with high irradiance see some of the highest recorded panel efficiencies in the field.</div></div>
+        <div class="info-card"><span class="ic-icon">🔬</span><div class="ic-tag tag-sci">QUANTUM PHYSICS</div><div class="ic-title">The Photovoltaic Effect Is Quantum</div><div class="ic-desc">Solar panels operate on quantum mechanics — specifically the photoelectric effect. Einstein's 1905 paper explaining that light behaves as discrete photon packets (quanta) was the theoretical foundation. This is the same paper that won him the 1921 Nobel Prize in Physics!</div></div>
+        <div class="info-card"><span class="ic-icon">🌱</span><div class="ic-tag tag-pv">ENERGY PAYBACK</div><div class="ic-title">Panels Pay Back Energy in 1–4 Years</div><div class="ic-desc">A solar panel takes 1–4 years to generate the energy used to manufacture it. Over a 25-year life, a panel produces 6–25× the energy invested — one of the best energy returns of any technology.</div></div>
+        <div class="info-card"><span class="ic-icon">🔭</span><div class="ic-tag tag-sci">SPACE SOLAR</div><div class="ic-title">Space Panels Are 30%+ Efficient</div><div class="ic-desc">Multi-junction solar cells used in satellites and space probes achieve 30–40% efficiency by stacking multiple semiconductor layers, each tuned to a different part of the solar spectrum.</div></div>
+        <div class="info-card"><span class="ic-icon">⚡</span><div class="ic-tag tag-pv">RECORD EFFICIENCY</div><div class="ic-title">Lab Record: 47.6% (Multi-Junction)</div><div class="ic-desc">The highest solar cell efficiency ever achieved is 47.6% by a concentrator multi-junction cell (NREL, 2023). For commercial silicon panels, the record is 26.7% (Kaneka, IBC). Standard rooftop panels are 20–23%.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="text-center reveal" style="margin-bottom:48px">
+    <span class="section-label">Global Clients</span>
+    <h2 class="section-title">Trusted by Solar Leaders <span class="accent">Worldwide</span></h2>
+  </div>
+  <div class="test-grid reveal">
+    <div class="tcard"><div class="tcard-stars">★★★★★</div><div class="tcard-text">"SolarAxis transformed how we manage our 500 rooftop installations across Mumbai and Pune. The AI alerts alone saved us ₹14 lakh in preventive maintenance last year."</div><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#FF6200,#F5A623)">R</div><div><div class="tcard-name">Rajesh Sharma</div><div class="tcard-role">CEO, SunPower India EPC</div></div><div class="tcard-country" style="margin-left:auto">🇮🇳</div></div></div>
+    <div class="tcard"><div class="tcard-stars">★★★★★</div><div class="tcard-text">"The NERSA compliance module saved us months of paperwork. Managing our portfolio across Cape Town, Joburg, and Durban is now effortless. Best solar software in Africa."</div><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#22C55E,#16A34A)">T</div><div><div class="tcard-name">Thabo Nkosi</div><div class="tcard-role">Director, AfriSolar Solutions</div></div><div class="tcard-country" style="margin-left:auto">🇿🇦</div></div></div>
+    <div class="tcard"><div class="tcard-stars">★★★★★</div><div class="tcard-text">"We deployed SolarAxis across our 200MW California portfolio. The ITC tracking and SREC management alone generates $2M+ in additional annual revenue. Game changer."</div><div class="tcard-author"><div class="tcard-avatar" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)">M</div><div><div class="tcard-name">Michael Chen</div><div class="tcard-role">VP Operations, SunVista Energy</div></div><div class="tcard-country" style="margin-left:auto">🇺🇸</div></div></div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="cta-box reveal">
+    <span class="section-label" style="display:block;text-align:center">Get Started Today</span>
+    <h2 class="section-title">Ready to Power Your <span class="accent">Solar Business?</span></h2>
+    <p class="section-desc" style="margin:16px auto 0;text-align:center">Join 2,400+ solar companies in 40+ countries using SolarAxis to manage, monitor, and maximize their solar assets.</p>
+    <div class="cta-btns">
+      <button class="btn btn-primary" style="font-size:15px;padding:14px 32px" onclick="openChat()">🚀 Start Free 30-Day Trial</button>
+      <button class="btn btn-ghost" style="font-size:15px;padding:14px 32px" onclick="openChat()">📞 Talk to an Expert</button>
+      <button class="btn btn-outline" style="font-size:15px;padding:14px 32px" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">🔢 Calculate ROI</button>
+    </div>
+    <div style="margin-top:24px;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;">✓ No credit card required &nbsp;•&nbsp; ✓ MNRE/ITC/NERSA compliant &nbsp;•&nbsp; ✓ 99.7% uptime SLA</div>
+  </div>
+</section>
+
+
+
+
+<!-- Footer ke upar Admin access link -->
+<section style="padding: 20px; text-align: center; background: #0D1420; border-top: 1px solid rgba(245,166,35,0.1);">
+    <p style="color: #8892A4; font-size: 12px;">
+        © 2026 SolarAxis Technologies | 
+        <a href="/login" style="color: #F5A623; text-decoration: none; font-weight: bold;">🔐 Admin Access</a>
+    </p>
+</section>
+
+
+
+
+
+
+
+
+<footer>
+  <div class="footer-sitemap">
+    <!-- <div class="fs-brand"></div> -->
+    <div class="fs-brand">
+      <div class="fs-logo">☀️ SolarAxis</div>
+      <p class="fs-brand-desc">Global solar energy management software trusted in 40+ countries. MNRE certified, ISO 27001 compliant. From rooftop to utility scale.</p>
+      <div class="fs-socials">
+        <a href="#" class="fs-social">𝕏</a>
+        <a href="#" class="fs-social">in</a>
+        <a href="#" class="fs-social">▶</a>
+        <a class="fs-social" onclick="showToast('📱 WhatsApp: +91 98765 43210')">💬</a>
+      </div>
+    </div>
+    <div>
+      <div class="fs-col-title">Solutions</div>
+      <div class="fs-col-links">
+        <a class="fs-link" href="#solutions">📱 Mobile App Dev</a>
+        <a class="fs-link" href="#management">📡 SCADA Monitoring</a>
+        <a class="fs-link" href="#management">🤖 AI Analytics</a>
+        <a class="fs-link" href="#solutions">📍 Survey Tools</a>
+        <a class="fs-link" href="#management">🔧 O&amp;M Management</a>
+        <a class="fs-link" href="#management">💰 Finance Tracking</a>
+      </div>
+    </div>
+    <div>
+      <div class="fs-col-title">Markets</div>
+      <div class="fs-col-links">
+        <a class="fs-link" href="#global">🇮🇳 India — MNRE</a>
+        <a class="fs-link" href="#global">🇺🇸 USA — ITC/SGIP</a>
+        <a class="fs-link" href="#global">🇿🇦 South Africa</a>
+        <a class="fs-link" href="#global">🇦🇺 Australia — CEC</a>
+        <a class="fs-link" href="#global">🇩🇪 Germany — EEG</a>
+        <a class="fs-link" href="#global">🇧🇷 Brazil / 🇦🇪 UAE</a>
+      </div>
+    </div>
+    <div>
+      <div class="fs-col-title">Science</div>
+      <div class="fs-col-links">
+        <a class="fs-link" href="#solar-science">☀️ How the Sun Works</a>
+        <a class="fs-link" href="#uv-science">🔬 UV Rays Guide</a>
+        <a class="fs-link" href="#how-panels-work">⚡ How Panels Work</a>
+        <a class="fs-link" href="#uv-science">🌈 Solar Spectrum</a>
+        <a class="fs-link" href="#uv-index">🌍 UV Index Map</a>
+        <a class="fs-link" href="#solar-science">📊 Panel Types</a>
+      </div>
+    </div>
+    <div>
+      <div class="fs-col-title">Company</div>
+      <div class="fs-col-links">
+        <a class="fs-link" onclick="showToast('📄 About page coming soon!')">About Us</a>
+        <a class="fs-link" href="#testimonials">Case Studies</a>
+        <a class="fs-link" onclick="showToast('🚀 We are hiring!')">Careers</a>
+        <a class="fs-link" href="#calculator">ROI Calculator</a>
+        <a class="fs-link" onclick="openChat();return false;">Contact Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 SolarAxis Technologies Pvt. Ltd. &nbsp;•&nbsp; ISO 27001 &nbsp;•&nbsp; MNRE Certified</div>
+    <div  class="cret" >Created by:-Piyush Gokhe</div>
+    <div style="display:flex;gap:16px">
+      <a class="footer-link" href="#">Privacy</a>
+      <a class="footer-link" href="#">Terms</a>
+      <a class="footer-link" href="#">Security</a>
+    </div>
+  </div>
+</footer>
+</div>
+
+<button class="chat-fab" id="chatFab" onclick="toggleChat()">
+  ☀️
+  <div class="chat-badge">1</div>
+</button>
+
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-avatar">🤖</div>
+    <div>
+      <div class="chat-name">SolarBot AI</div>
+      <div class="chat-status">Online • Usually replies instantly</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="chat-msgs" id="chatMsgs">
+    <div class="msg">
+      <div class="msg-avatar bot">🤖</div>
+      <div>
+        <div class="msg-bubble">🌞 Hello! I'm SolarBot, your AI assistant for solar energy management.<br><br>I can help with system sizing, ROI calculations, software demos, subsidy info (India, USA, South Africa), and mobile app development.<br><br>How can I power your solar journey today?</div>
+        <div class="msg-time">Just now</div>
+      </div>
+    </div>
+  </div>
+  <div class="chat-quick-replies" id="quickReplies">
+    <button class="qr-btn" onclick="quickChat('Calculate solar system size')">📐 System Size</button>
+    <button class="qr-btn" onclick="quickChat('India MNRE subsidy info')">🇮🇳 India Subsidy</button>
+    <button class="qr-btn" onclick="quickChat('South Africa solar info')">🇿🇦 SA Solar</button>
+    <button class="qr-btn" onclick="quickChat('How do UV rays affect solar panels?')">🔬 UV &amp; Panels</button>
+    <button class="qr-btn" onclick="quickChat('How does a solar panel work?')">⚡ How It Works</button>
+    <button class="qr-btn" onclick="quickChat('Mobile app development cost')">📱 App Dev</button>
+    <button class="qr-btn" onclick="quickChat('Request a demo')">🚀 Get Demo</button>
+  </div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput" placeholder="Ask about solar management..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-send" onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+<script src="static/script.js"></script>
+
+</body>
+</html>

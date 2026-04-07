@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="width: 100%;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h2 class="sun">Admin Control Center</h2>
+        <div style="background: #F5A623; color: black; padding: 10px 20px; border-radius: 10px; font-weight: bold;">
+            Total Logged Users: {{count}}
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>User Database Monitoring</h3>
+        <p style="color: #8892A4; font-size: 14px;">Niche un logo ki list hai jinhone SolarAxis par account banaya hai.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Full Name</th>
+                    <th>Email Address</th>
+                    <th>Phone</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr>
+                    <td style="color: #F5A623;">#{{u.customer_id}}</td>
+                    <td><b>{{u.name}}</b></td>
+                    <td>{{u.email}}</td>
+                    <td>{{u.phone}}</td>
+                    <td>
+                        <span style="background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 5px;">
+                            {{u.connection_type}}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        {% if not users %}
+            <p style="text-align: center; padding: 20px;">Abhi tak koi user register nahi hua hai.</p>
+        {% endif %}
+    </div>
+
+    <a href="/logout" style="color: #EF4444; text-decoration: none; font-size: 14px;">← Logout Admin Session</a>
+</div>
+{% endblock %}

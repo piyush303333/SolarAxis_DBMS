@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SolarAxis - DBMS</title>
+    <style>
+        body { background: #080C14; color: #F0F4FF; font-family: sans-serif; margin: 0; }
+        .nav { background: #131D2E; padding: 15px 5%; display: flex; justify-content: space-between; border-bottom: 1px solid #F5A623; }
+        .container { padding: 40px 5%; }
+        .card { background: #131D2E; padding: 25px; border-radius: 15px; border: 1px solid rgba(245,166,35,0.2); margin-bottom: 20px; }
+        input, textarea { width: 100%; padding: 12px; margin: 10px 0; background: #0D1420; border: 1px solid #1A2540; color: white; border-radius: 8px; box-sizing: border-box; }
+        .btn { background: #F5A623; color: black; padding: 10px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; text-decoration: none; }
+        .sun { color: #F5A623; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; border-bottom: 1px solid #1A2540; text-align: left; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <h2 class="sun">☀️ SolarAxis</h2>
+        {% if session['user_id'] %}<a href="/logout" style="color:red; text-decoration:none;">Logout</a>{% endif %}
+    </div>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+
+</body>
+</html>
